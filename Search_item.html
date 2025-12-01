@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+            <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Search Item</title>
+    <link rel="stylesheet" href="globals.css" />
+    <link rel="stylesheet" href="Search_item.css" />
+  </head>
+
+  <body>
+           <div id="form-status" class="status-banner" role="status" aria-live="polite"></div>
+
+      <div class="report-found-item search-theme">
+        <div class="rectangle"></div>
+              <img class="logo-badge" src="Untitled design (4) 1.png" alt="UNIFIND badge" />
+              <img class="logo-wordmark" src="UNIFIND.png" alt="UNIFIND wordmark" />
+              <div class="div">
+                <input
+                  type="search"
+                  id="top-search"
+                  class="search-input"
+                  placeholder="Search Items"
+                  aria-label="Search Items"
+                  autocomplete="off"
+                  style="padding-left:34px;"
+                />
+              </div>
+              <img class="iconamoon-search" src="iconamoon_search-thin.png" alt="Search icon" style="pointer-events:none;" />
+              <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+        <div class="text-wrapper-3">Search Item</div>
+        <p class="p">Find lost or found items with advanced filters</p>
+        <div class="rectangle-2"><img class="hero-icon" src="ph_magnifying-glass (1).png" alt="" /></div>
+        <img class="line" src="img/line-4.png" alt="divider" />
+        <div class="box" aria-label="Search Filters">
+          <div class="rectangle"></div>
+          <div class="box-content">
+            <div class="filters">
+              <div class="filters-top">
+                <div class="filters-title-wrap">
+                  <span class="filters-icon" aria-hidden="true">☰</span>
+                  <div class="filters-title">Search Items</div>
+                </div>
+              </div>
+              <div class="filters-divider" aria-hidden="true"></div>
+              <div class="filters-actions">
+                <button type="button" id="clear-filters" class="clear-btn" aria-label="Clear Filters">
+                  <span class="clear-icon">✕</span>
+                  <span class="clear-text">Clear Filters</span>
+                </button>
+              </div>
+              <form id="filters-form" class="filters-form" aria-label="Filters" autocomplete="off">
+                <div class="field-row">
+                  <div class="field grow">
+                    <label for="f-keyword">Keyword</label>
+                    <input type="text" id="f-keyword" placeholder="search by item name or description..." />
+                  </div>
+                  <div class="field fixed">
+                    <label for="f-item-type">Item Type</label>
+                    <select id="f-item-type">
+                      <option value="all">All Items</option>
+                      <option value="lost">Lost</option>
+                      <option value="found">Found</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="field-row">
+                  <div class="field fixed">
+                    <label for="f-category">Category</label>
+                    <select id="f-category">
+                      <option value="all">All</option>
+                      <option value="clothing">Clothing</option>
+                      <option value="gadgets">Electronics</option>
+                      <option value="accessories">Accessories</option>
+                      <option value="documents">Documents</option>
+                      <option value="books">Books & Stationery</option>
+                      <option value="food-and-drink">Food and Drink</option>
+                      <option value="keys">Keys</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                  <div class="field fixed">
+                    <label for="f-location">Location</label>
+                    <input type="text" id="f-location" placeholder="Search by location..." />
+                  </div>
+                  <div class="field fixed">
+                    <label for="f-date-from">Date From</label>
+                    <input type="date" id="f-date-from" />
+                  </div>
+                  <div class="field fixed">
+                    <label for="f-date-to">Date To</label>
+                    <input type="date" id="f-date-to" />
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <section id="items-section" class="items-section" aria-labelledby="items-title">
+          <div id="items-title" class="items-title">Items Found</div>
+          <div id="items-grid" class="items-grid" role="list"></div>
+        </section>
+
+              <div class="vector" role="button" aria-label="Open menu" tabindex="0">
+                <span class="bar top"></span>
+                <span class="bar mid"></span>
+                <span class="bar bottom"></span>
+                <span class="chevron"></span>
+              </div>
+      </div>
+
+            <script>
+              (function () {
+                var baseW = 1920;
+                var targetH = 1038.28;
+                function applyScale() {
+                  var el = document.querySelector(".report-found-item");
+                  if (!el) return;
+                  var vw = window.innerWidth || document.documentElement.clientWidth;
+                  var scale = vw / baseW;
+                  if (!scale || scale <= 0) scale = 1;
+                  el.style.transformOrigin = "top left";
+                  el.style.transform = "scale(" + scale + ")";
+                  var baseH = targetH / scale;
+                  el.style.height = baseH + "px";
+                }
+                window.addEventListener("load", applyScale);
+                window.addEventListener("resize", applyScale);
+              })();
+            </script>
+
+    <script>
+      (function(){
+              var trigger=document.querySelector('.vector');
+              var overlay=document.createElement('div');
+              overlay.className='side-nav-overlay';
+              var drawer=document.createElement('nav');
+              drawer.className='side-nav';
+              drawer.setAttribute('aria-label','Main Navigation');
+              
+              // Close button
+              var closeBtn=document.createElement('button');
+              closeBtn.className='side-nav-close';
+              closeBtn.innerHTML='&times;';
+              closeBtn.setAttribute('aria-label','Close menu');
+              
+              // Header section
+              var header=document.createElement('div');
+              header.className='side-nav-header';
+              var headerContent=document.createElement('div');
+              headerContent.className='side-nav-header-content';
+              var iconBox=document.createElement('div');
+              iconBox.className='side-nav-header-icon';
+              var iconImg=document.createElement('img');
+              iconImg.src='fluent_box-16-regular.png';
+              iconImg.alt='';
+              iconBox.appendChild(iconImg);
+              var titleWrapper=document.createElement('div');
+              titleWrapper.className='side-nav-title-wrapper';
+              var title=document.createElement('div');
+              title.className='side-nav-title';
+              title.textContent='Lost & Found';
+              var sub=document.createElement('div');
+              sub.className='side-nav-sub';
+              sub.textContent='Campus System';
+              titleWrapper.appendChild(title);
+              titleWrapper.appendChild(sub);
+              headerContent.appendChild(iconBox);
+              headerContent.appendChild(titleWrapper);
+              header.appendChild(headerContent);
+              
+              // Menu section
+              var menuSection=document.createElement('div');
+              menuSection.className='side-nav-menu-section';
+              var menuLabel=document.createElement('div');
+              menuLabel.className='side-nav-menu-label';
+              menuLabel.textContent='MAIN MENU';
+              var list=document.createElement('div');
+              list.className='side-nav-list';
+              
+              function createMenuItem(label, href, iconClass, active){
+                var el=document.createElement('div');
+                var chipClass='';
+                if(label==='Timeline') chipClass=' chip-blue-light';
+                else if(label==='Report Found Item') chipClass=' chip-whitegreen-hover';
+                else if(label==='Report Lost Item') chipClass=' chip-whiteblue';
+                el.className='side-nav-item'+(active?' active':'')+chipClass;
+                var icon=document.createElement('span');
+                icon.className='side-nav-item-icon '+iconClass;
+                var text=document.createElement('span');
+                text.className='side-nav-item-text';
+                text.textContent=label;
+                el.appendChild(icon);
+                el.appendChild(text);
+                if(href){
+                  el.addEventListener('click',function(){ 
+                    drawer.classList.remove('open');
+                    overlay.style.display='none';
+                    document.body.classList.remove('drawer-open');
+                    window.location.href=href; 
+                  });
+                }
+                return el;
+              }
+              
+              list.appendChild(createMenuItem('Timeline', 'home.html', 'icon-home', false));
+              list.appendChild(createMenuItem('Report Found Item', 'Report_Found_item.html', 'icon-document', false));
+              list.appendChild(createMenuItem('Report Lost Item', 'report_lost_item.html', 'icon-document', false));
+              list.appendChild(createMenuItem('Search Items', 'Search_item.html', 'icon-search', true));
+              
+              menuSection.appendChild(menuLabel);
+              menuSection.appendChild(list);
+              
+              drawer.appendChild(closeBtn);
+              drawer.appendChild(header);
+              var footer=document.createElement('div');
+              footer.className='side-nav-footer';
+              var user=document.createElement('div');
+              user.className='user-card';
+              var avatar=document.createElement('div');
+              avatar.className='user-avatar';
+              avatar.textContent='S';
+              var meta=document.createElement('div');
+              meta.className='user-meta';
+              var name=document.createElement('span');
+              name.textContent='Student';
+              var email=document.createElement('span');
+              email.textContent='student@unifind.edu';
+              meta.appendChild(name); meta.appendChild(email);
+              user.appendChild(avatar); user.appendChild(meta);
+              var logout=document.createElement('button');
+              logout.className='logout-btn';
+              logout.textContent='Logout';
+              logout.addEventListener('click',function(){ window.location.href='login.html'; });
+              footer.appendChild(user); footer.appendChild(logout);
+              drawer.appendChild(menuSection);
+              drawer.appendChild(footer);
+              
+              document.body.appendChild(overlay);
+              document.body.appendChild(drawer);
+              
+              function open(){
+                overlay.style.display='block';
+                drawer.classList.add('open');
+                document.body.classList.add('drawer-open');
+                if(trigger) trigger.classList.add('open');
+                setTimeout(function(){ overlay.style.opacity='1'; },10);
+              }
+
+              function close(){
+                overlay.style.opacity='0';
+                drawer.classList.remove('open');
+                document.body.classList.remove('drawer-open');
+                if(trigger) trigger.classList.remove('open');
+                setTimeout(function(){ overlay.style.display='none'; },250);
+              }
+              
+              if(trigger){
+                trigger.style.cursor='pointer';
+                trigger.addEventListener('click',function(e){
+                  e.stopPropagation();
+                  if(drawer.classList.contains('open')){
+                    close();
+                  }else{
+                    open();
+                  }
+                });
+                trigger.addEventListener('keydown',function(e){
+                  if(e.key==='Enter' || e.key===' '){
+                    e.preventDefault();
+                    if(drawer.classList.contains('open')){ close(); } else { open(); }
+                  }
+                });
+              }
+              
+              closeBtn.addEventListener('click',function(e){
+                e.stopPropagation();
+                close();
+              });
+              
+              overlay.addEventListener('click',function(e){
+                if(e.target===overlay) close();
+              });
+              
+              document.addEventListener('keydown',function(e){
+                if(e.key==='Escape'&&drawer.classList.contains('open')){
+                  close();
+                }
+              });
+      })();
+    </script>
+    <script>
+      (function(){
+        var data=[
+          { id:1, name:'Pathfit Pants', type:'lost', category:'clothing', location:'Wikilunate Hall', date:'2025-10-30', description:'Size Large' },
+          { id:2, name:'Water Bottle', type:'found', category:'accessories', location:'Acad IV', date:'2025-10-30', description:'Found around 10am' },
+          { id:3, name:'iPhone 17', type:'lost', category:'gadgets', location:'Canteen', date:'2025-10-29', description:'Fully paid' }
+        ];
+
+        function byId(id){ return document.getElementById(id); }
+        var grid=byId('items-grid');
+
+        function render(items){
+          grid.innerHTML='';
+          if(!items.length){
+            var empty=document.createElement('div');
+            empty.className='items-empty';
+            empty.textContent='No items match the filters.';
+            grid.appendChild(empty);
+            return;
+          }
+          items.forEach(function(it){
+            var card=document.createElement('article');
+            card.className='item-card';
+            card.setAttribute('role','listitem');
+            var head=document.createElement('div');
+            head.className='item-card-head '+(it.type==='found'?'found':'lost');
+            var chipCat=document.createElement('div'); chipCat.className='chip category'; chipCat.textContent=(it.category||'');
+            var chipStatus=document.createElement('div'); chipStatus.className='chip status'; chipStatus.textContent=(it.type==='found'?'Found':'Lost');
+            var iconWrap=document.createElement('div'); iconWrap.className='head-icon';
+            var icon=document.createElement('img'); icon.alt=''; icon.src=(it.type==='found'?'fluent_box-16-regular.png':'humbleicons_exclamation.png');
+            iconWrap.appendChild(icon);
+            head.appendChild(chipCat); head.appendChild(chipStatus); head.appendChild(iconWrap);
+
+            var body=document.createElement('div'); body.className='item-card-body';
+            var title=document.createElement('div'); title.className='item-card-title'; title.textContent=it.name;
+            var desc=document.createElement('div'); desc.className='item-card-desc'; desc.textContent=it.description || '';
+
+            var f1=document.createElement('div'); f1.className='item-card-field';
+            var ico1=document.createElement('span'); ico1.className='field-icon'; ico1.textContent='📍';
+            var txt1=document.createElement('span'); txt1.textContent='Last Seen: '+it.location;
+            f1.appendChild(ico1); f1.appendChild(txt1);
+
+            var f2=document.createElement('div'); f2.className='item-card-field';
+            var ico2=document.createElement('span'); ico2.className='field-icon calendar'; ico2.textContent='📅';
+            var txt2=document.createElement('span'); txt2.textContent=it.date;
+            f2.appendChild(ico2); f2.appendChild(txt2);
+
+            var badge=document.createElement('div'); badge.className='item-card-badge '+(it.type==='found'?'found':'lost'); badge.textContent=(it.type==='found'?'Available to claim':'Still Lost');
+
+            var divider=document.createElement('div'); divider.className='item-card-divider';
+
+            var contact=document.createElement('div'); contact.className='item-card-contact';
+            var contactLabel=document.createElement('span'); contactLabel.textContent='Contact:';
+            var contactEmail=document.createElement('span'); contactEmail.textContent='student@unifind.edu';
+            contact.appendChild(contactLabel); contact.appendChild(contactEmail);
+
+            var actions=document.createElement('div'); actions.className='item-card-actions';
+            var btn=document.createElement('button'); btn.className='item-card-btn'+(it.type==='found'?' found':''); btn.textContent=(it.type==='found'?'View Details & Claim':'Contact Owner');
+            actions.appendChild(btn);
+
+            body.appendChild(title); body.appendChild(desc); body.appendChild(f1); body.appendChild(f2); body.appendChild(badge); body.appendChild(divider); body.appendChild(contact); body.appendChild(actions);
+            card.appendChild(head); card.appendChild(body);
+            grid.appendChild(card);
+          });
+        }
+
+        function normalizeDate(v){ if(!v) return null; try{ return new Date(v); }catch(e){ return null; } }
+        function inRange(d, from, to){
+          if(!d) return true; var dd=new Date(d);
+          if(from && dd < from) return false;
+          if(to && dd > to) return false;
+          return true;
+        }
+
+        function filter(){
+          var keyword=(byId('f-keyword').value||'').toLowerCase();
+          var topq=(byId('top-search')? (byId('top-search').value||'').toLowerCase() : '');
+          var type=byId('f-item-type').value;
+          var category=byId('f-category').value;
+          var loc=(byId('f-location').value||'').toLowerCase();
+          var from=normalizeDate(byId('f-date-from').value);
+          var to=normalizeDate(byId('f-date-to').value);
+          var out=data.filter(function(it){
+            var ok=true;
+            if(type!=='all') ok=ok && it.type===type;
+            if(category!=='all') ok=ok && it.category===category;
+            var combined=(keyword||topq||'');
+            if(combined) ok=ok && (
+              it.name.toLowerCase().includes(combined) ||
+              (it.description||'').toLowerCase().includes(combined) ||
+              (it.location||'').toLowerCase().includes(combined) ||
+              (it.category||'').toLowerCase().includes(combined)
+            );
+            if(loc) ok=ok && it.location.toLowerCase().includes(loc);
+            ok=ok && inRange(it.date, from, to);
+            return ok;
+          });
+          render(out);
+        }
+
+        function bind(){
+          ['f-keyword','f-item-type','f-category','f-location','f-date-from','f-date-to'].forEach(function(id){
+            var el=byId(id); if(!el) return; el.addEventListener('input', filter); el.addEventListener('change', filter);
+          });
+          var top=byId('top-search'); if(top){ top.addEventListener('input', filter); }
+          var clear=byId('clear-filters');
+          if(clear){ clear.addEventListener('click', function(){
+            ['f-keyword','f-item-type','f-category','f-location','f-date-from','f-date-to'].forEach(function(id){
+              var el=byId(id); if(!el) return; if(el.tagName==='SELECT'){ el.value='all'; } else { el.value=''; }
+            });
+            var topEl=byId('top-search'); if(topEl){ topEl.value=''; }
+            filter();
+          }); }
+        }
+
+        bind();
+        render(data);
+      })();
+    </script>
+  </body>
+</html>

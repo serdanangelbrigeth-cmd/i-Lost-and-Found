@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNIFIND</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100%; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background-image: url('Background.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: right center;
+            color: #ffffff;
+        }
+        .page { position: relative; min-height: 100vh; }
+        .brand {
+            position: absolute;
+            top: 24px;
+            left: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .brand .badge {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        .brand .badge img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .brand .word { height: 22px; display: block; }
+        .seal {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 110px;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            display: block;
+        }
+        .seal img { width: 100%; height: 100%; object-fit: contain; display: block; }
+        .center {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 330px;
+            width: 960px;
+            max-width: 90vw;
+            text-align: center;
+        }
+        .title {
+            font-size: 44px;
+            font-weight: 800;
+            line-height: 1.1;
+        }
+        .title .uni { color: #1786ff; }
+        .title .find { color: #2ea043; }
+        .subtitle {
+            margin-top: 14px;
+            font-size: 14px;
+            color: #9ca3af;
+            font-weight: 500;
+        }
+        .btn {
+            margin: 22px auto 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 153px;
+            height: 38px;
+            padding: 0;
+            border-radius: 12px;
+            background: transparent;
+            color: #ffffff;
+            border: 2px solid #ffffff;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        @media (max-width: 768px) {
+            .seal { top: 90px; width: 140px; height: 140px; }
+            .center { top: 270px; width: 92vw; }
+            .title { font-size: 34px; }
+        }
+        @media (max-width: 480px) {
+            .seal { top: 80px; width: 120px; height: 120px; }
+            .center { top: 240px; }
+            .title { font-size: 28px; }
+        }
+
+        
+        .about-section { position: relative; margin-top: 0; background:#ffffff; width: 100vw; left: 50%; transform: translateX(-50%); overflow: hidden; }
+        .about-stripes { position: absolute; inset: 0; }
+        .about-section { --stripe-height: 220px; }
+        .about-stripes::before { content:""; position:absolute; left:-12vw; top:0; width:120vw; height:var(--stripe-height); background:#0b57d2; transform: skewX(-6deg); transform-origin:left top; }
+        .about-stripes::after { content:""; position:absolute; right:-12vw; bottom:0; width:120vw; height:var(--stripe-height); background:#0b57d2; transform: skewX(6deg); transform-origin:right bottom; }
+        .about-wrap { position: relative; z-index: 1; width: 960px; margin: 0 auto; padding: 40px 0 60px; display: flex; align-items: flex-start; gap: 48px; }
+        .about-left { flex: 0 0 520px; }
+        .about-box { background: linear-gradient(180deg, #a6c8ff 0%, #8fb1ff 100%); border-radius: 18px; box-shadow: 0 14px 36px rgba(0,0,0,.18); padding: 26px 28px; }
+        .about-box h2 { font-size: 24px; font-weight: 800; color:#111827; margin-bottom: 12px; letter-spacing: -0.2px; }
+        .about-box strong { display:block; font-size:16px; font-weight: 700; color:#111827; margin-bottom:8px; }
+        .about-box p { font-size:14px; color:#0b2a5b; line-height:1.58; }
+        .about-box p + p { margin-top:14px; }
+        .about-right { flex: 1; text-align: center; padding-top: 6px; }
+        .logo-slot { width: 220px; height: 200px; margin: 0 auto 14px; }
+        .wordmark { font-size: 44px; font-weight: 800; letter-spacing: -0.5px; }
+        .wordmark .uni { color: #1786ff; }
+        .wordmark .find { color: #2ea043; }
+
+        @media (max-width: 1024px) {
+            .about-wrap { width: 92vw; gap: 32px; }
+            .about-left { flex-basis: 54vw; }
+        }
+
+        @media (max-width: 768px) {
+            .about-wrap { flex-direction: column; align-items: center; padding-bottom: 48px; }
+            .about-left { flex-basis: auto; width: 100%; }
+            .about-right { width: 100%; }
+        }
+        .how { background:#ffffff; width: 100vw; left: 50%; transform: translateX(-50%); position: relative; }
+        .how-bar { height: 64px; width: 100%; display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:800; color:#ffffff; background: linear-gradient(90deg, #2ea043 0%, #1e7f32 100%); letter-spacing: 0.5px; }
+
+        .policies { position: relative; background:#ffffff; width: 100vw; left: 50%; transform: translateX(-50%); }
+        .policies-hero { height: 240px; width: 100%; background:#004AAD; background-image: linear-gradient(rgba(0,0,0,0.06), rgba(0,0,0,0.06)), url('policies-bg-placeholder.jpg'); background-size: cover; background-position: center; display:flex; align-items:center; justify-content:center; }
+        .policies-hero-content { text-align:center; color:#ffffff; display:flex; flex-direction:column; align-items:center; gap:8px; }
+        .policies-logo { width: 64px; height: 64px; border-radius:50%; background:#ffffff; box-shadow:0 8px 24px rgba(0,0,0,0.20); display:flex; align-items:center; justify-content:center; overflow:hidden; }
+        .policies-logo img { width:100%; height:100%; object-fit:contain; }
+        .policies-title { font-size:28px; font-weight:800; letter-spacing:0.2px; }
+        .policies-subtitle { font-size:14px; font-weight:600; opacity:0.9; }
+        .policies-card { width:960px; max-width:92vw; margin: 16px auto 28px; background: linear-gradient(180deg, #f3f7ff 0%, #ffffff 100%); border-radius: 18px; box-shadow: 0 14px 36px rgba(0,0,0,0.12); padding: 24px 28px; text-align:center; color:#111827; }
+        .policies-card h3 { font-size:18px; font-weight:800; margin-bottom:8px; }
+        .policies-card p { font-size:14px; color:#4b5563; line-height:1.6; }
+        .policies-card p + h3 { margin-top:16px; }
+
+        .contact { position: relative; background: linear-gradient(180deg, #e8f0ff 0%, #ffffff 100%); width: 100vw; left: 50%; transform: translateX(-50%); }
+        .contact-inner { width:960px; max-width:92vw; margin:0 auto; padding: 24px 28px 40px; text-align:center; }
+        .contact-line { width: 140px; height: 3px; background:#2baf4c; margin: 0 auto 12px; border-radius:2px; }
+        .contact-title { font-size:22px; font-weight:800; color:#111827; margin-bottom:12px; }
+        .contact-item { font-size:14px; color:#4b5563; line-height:1.6; }
+        .contact-logos { display:flex; justify-content:center; align-items:center; gap:18px; margin-top:18px; }
+        .contact-logos img { width:48px; height:48px; object-fit:cover; border-radius:8px; box-shadow:0 6px 16px rgba(0,0,0,0.12); }
+    </style>
+    <link rel="preload" as="image" href="Background.png">
+    <link rel="preload" as="image" href="unifind-logo.png">
+    <link rel="preload" as="image" href="CSPC-logo.png">
+    <link rel="preload" as="image" href="Untitled design (4) 1.png">
+    <link rel="preload" as="image" href="UNIFIND.png">
+</head>
+<body>
+    <div class="page">
+        <div class="brand">
+            <div class="badge">
+                <img src="Untitled design (4) 1.png" alt="UNIFIND circular logo">
+            </div>
+            <img class="word" src="UNIFIND.png" alt="UNIFIND wordmark">
+        </div>
+        <div class="seal">
+            <img src="CSPC LOGO (1) 1.png" alt="College Seal">
+        </div>
+        <div class="center">
+            <h1 class="title">Welcome to <span class="uni">UNI</span><span class="find">FIND</span></h1>
+            <p class="subtitle">We know how stressful it is to lose something. This new CPSC Lost and Found system is designed to make it easier to get your items back.</p>
+            <a class="btn" href="#">Log In</a>
+        </div>
+    
+        
+    </div>
+
+    <section class="about-section" aria-label="About UNIFIND">
+        <div class="about-stripes"></div>
+        <div class="about-wrap">
+            <div class="about-left">
+                <div class="about-box">
+                    <h2>About UNIFIND</h2>
+                    <strong>Our Mission</strong>
+                    <p>The CSPC Lost and Found Management System is a centralized, web-based platform designed to serve the Camarines Sur Polytechnic Colleges community. Our mission is simple: to efficiently and effectively reunite students, faculty, and staff with their lost belongings.</p>
+                    <p>We understand that losing a personal item can be stressful. This system is built to make the process of reporting, finding, and recovering lost items as smooth, transparent, and quick as possible. We aim to foster a campus culture of honesty, responsibility, and community support, where every member feels confident that a lost item has a high chance of being returned.</p>
+                </div>
+            </div>
+            <div class="about-right">
+                <div class="logo-slot"></div>
+                <div class="wordmark"><span class="uni">UNI</span><span class="find">FIND</span></div>
+            </div>
+        </div>
+    </section>
+    <section class="how" aria-label="How It Works">
+        <div class="how-bar">HOW IT WORKS</div>
+    </section>
+
+    <section class="policies" aria-label="Our Policies">
+        <div class="policies-hero">
+            <div class="policies-hero-content">
+                <div class="policies-logo"><img src="Untitled design (4) 1.png" alt="UNIFIND"></div>
+                <div class="policies-title">OUR POLICIES</div>
+                <div class="policies-subtitle">Please read our official guidelines. This ensures that your lost items are handled properly, safely, and with correct facility adherence.</div>
+            </div>
+        </div>
+        <div class="policies-card">
+            <h3>Holding Period</h3>
+            <p>Found items will be held in safekeeping by the Office of Student Affairs for a period of 30 days (one month).</p>
+            <h3>Unclaimed Items</h3>
+            <p>Items that remain unclaimed after the 30-day holding period may be recycled, donated, or disposed of in accordance with school policies.</p>
+            <h3>Disclaimer</h3>
+            <p>The CSPC Lost and Found Management System is a service provided to the community. CSPC is not responsible for any lost, stolen, or damaged items. Users are encouraged to follow all community reminders to ensure the retrieval of their belongings.</p>
+        </div>
+    </section>
+
+    <section class="contact" aria-label="Contact Us">
+        <div class="contact-inner">
+            <div class="contact-line"></div>
+            <div class="contact-title">CONTACT US</div>
+            <div class="contact-item">Office / Student Affairs Lost and Found (OSALF)</div>
+            <div class="contact-item">Location: CSPC Main Campus, Nabua</div>
+            <div class="contact-item">Coordinator: Placeholder Name</div>
+            <div class="contact-item">Email: placeholder@example.com</div>
+            <div class="contact-item">Phone: 000-000-0000</div>
+            <div class="contact-logos">
+                <img src="footer-logo-1.png" alt="Footer Logo 1">
+                <img src="footer-logo-2.png" alt="Footer Logo 2">
+                <img src="footer-logo-3.png" alt="Footer Logo 3">
+            </div>
+        </div>
+    </section>
+
+    <script>
+    (function() {
+        function setStripeHeight() {
+            var base = Math.max(960, window.innerWidth);
+            var h = Math.round(base * 0.082);
+            h = Math.max(64, Math.min(96, h));
+            document.querySelectorAll('.about-section').forEach(function(sec){
+                sec.style.setProperty('--stripe-height', h + 'px');
+            });
+        }
+        setStripeHeight();
+        window.addEventListener('resize', setStripeHeight);
+    })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+            <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Report Lost Item</title>
+    <link rel="stylesheet" href="globals.css" />
+    <link rel="stylesheet" href="Report_Found_item.css" />
+  </head>
+
+  <body>
+           <div id="form-status" class="status-banner" role="status" aria-live="polite"></div>
+
+      <div class="report-found-item">
+        <div class="rectangle"></div>
+              <img class="logo-badge" src="Untitled design (4) 1.png" alt="UNIFIND badge" />
+              <img class="logo-wordmark" src="UNIFIND.png" alt="UNIFIND wordmark" />
+              <div class="div">
+                <input
+                  type="search"
+                  id="top-search"
+                  class="search-input"
+                  placeholder="Search Items"
+                  aria-label="Search Items"
+                  autocomplete="off"
+                  style="padding-left:34px;"
+                />
+              </div>
+              <img class="iconamoon-search" src="iconamoon_search-thin.png" alt="Search icon" style="pointer-events:none;" />
+              <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+        <div class="text-wrapper-3">Report Found Item</div>
+        <p class="p">Help reunite lost items with their owners</p>
+        <div class="rectangle-2"></div>
+        <img class="fluent-box" src="fluent_box-16-regular.png" alt="Package icon" />
+        <div class="rectangle-3"></div>
+        <div class="rectangle-4"></div>
+              <img class="line" src="img/line-4.png" alt="divider" />
+              <form id="found-item-form" novalidate>
+                <h2 class="text-wrapper-13">Item Details</h2>
+        
+                <label class="text-wrapper-14" for="item-name">Item Name*</label>
+                <input
+                  type="text"
+                  id="item-name"
+                  name="itemName"
+                  class="rectangle-5 form-input"
+                  placeholder="e.g., Water Bottle"
+                  required
+                />
+        
+                <label class="text-wrapper-15" for="category">Category*</label>
+                <select id="category" name="category" class="rectangle-6 form-select" required>
+                  <option value="">Select category</option>
+                  <option value="food-and-drink">Food and Drink</option>
+               <option value="electronics">Electronics</option>
+                <option value="books">Books & Stationery</option>
+                 <option value="documents">Documents</option>
+                  <option value="clothing">Clothing</option>
+                  <option value="accessories">Accessories</option>
+                <option value="keys">Keys</option>
+                  <option value="other">Other</option>
+                </select>
+        
+                <label class="text-wrapper-22" for="date-found">Date Found*</label>
+                <input type="date" id="date-found" name="dateFound" class="rectangle-7 form-input" required />
+        
+              <label class="text-wrapper-16" for="location-found">Location Found*</label>
+                <input
+                  type="text"
+                  id="location-found"
+                  name="locationFound"
+                  class="rectangle-8 form-input"
+                  placeholder="e.g., Library 2nd Floor"
+                  required
+                />
+        
+                <label class="text-wrapper-17" for="description">Description</label>
+                <textarea
+                  id="description"
+                  name="description"
+                  class="rectangle-15 form-textarea"
+                  placeholder="Provide detailed description..."
+                rows="6"
+               ></textarea>
+        
+                <label class="text-wrapper-18" for="finder-name">Your Name</label>
+                <input
+                  type="text"
+                  id="finder-name"
+                  name="finderName"
+                class="rectangle-9 form-input"
+                  placeholder="Full Name"
+                />
+        
+              <label class="text-wrapper-21" for="contact">Your Contact</label>
+                <input
+                  type="text"
+                  id="contact"
+                  name="contact"
+                  class="rectangle-11 form-input"
+                placeholder="Email or Phone number"
+                required
+            />
+        
+              <label class="text-wrapper-19" for="item-photo">Item Photo (Optional)</label>
+                <div class="rectangle-16 upload-zone">
+                  <label for="item-photo" class="upload-label">
+                    <input type="file" id="item-photo" name="itemPhoto" accept="image/*" />
+                    <img class="upload-icon" src="arrow.png" alt="Upload icon" />
+                    <span class="upload-text">Click to upload or drag and drop</span>
+                </label>
+                </div>
+        
+                <div class="rectangle-10 security-card">
+                  <p class="text-wrapper-20">Security Questions</p>
+        <p class="text-wrapper-9">Add questions to verify ownership</p>
+                  <div id="question-list" class="question-list"></div>
+              </div>
+        
+                <button type="button" id="add-question-btn" class="rectangle-12 btn secondary">
+                  Add Question
+                </button>
+        
+                <button type="button" id="cancel-btn" class="rectangle-13 btn ghost">Cancel</button>
+                <button type="submit" class="rectangle-14 btn primary"><span class="btn-icon" aria-hidden="true"></span><span>Submit Found Item</span></button>
+              </form>
+        
+              <img class="fe-arrow-up" src="fe_arrow-up.png" alt="expand icon" />
+              <img class="mdi-calendar" src="mdi_calendar.png" alt="calendar icon" />
+              <img class="img" src="iconoir_security-pass.png" alt="security icon" />
+              <div class="vector" role="button" aria-label="Open menu" tabindex="0">
+                <span class="bar top"></span>
+                <span class="bar mid"></span>
+                <span class="bar bottom"></span>
+                <span class="chevron"></span>
+              </div>
+              
+      </div>
+
+            <script>
+              (function () {
+                var baseW = 1920;
+                var targetH = 1038.28;
+                function applyScale() {
+                  var el = document.querySelector(".report-found-item");
+                  if (!el) return;
+                  var vw = window.innerWidth || document.documentElement.clientWidth;
+                  var scale = vw / baseW;
+                  if (!scale || scale <= 0) scale = 1;
+                  el.style.transformOrigin = "top left";
+                  el.style.transform = "scale(" + scale + ")";
+                  var baseH = targetH / scale;
+                  el.style.height = baseH + "px";
+                }
+                window.addEventListener("load", applyScale);
+                window.addEventListener("resize", applyScale);
+              })();
+            </script>
+
+    <script src="form-functionality.js"></script>
+          <script>
+            (function(){
+              var dateInput=document.getElementById('date-found');
+              var calendarIcon=document.querySelector('.mdi-calendar');
+              if(calendarIcon && dateInput){
+                calendarIcon.addEventListener('click',function(){
+                  if(typeof dateInput.showPicker==='function'){ dateInput.showPicker(); }
+                  else { dateInput.focus(); }
+                });
+              }
+            })();
+          </script>
+
+    <script>
+      (function(){
+              var trigger=document.querySelector('.vector');
+              var overlay=document.createElement('div');
+              overlay.className='side-nav-overlay';
+              var drawer=document.createElement('nav');
+              drawer.className='side-nav';
+              drawer.setAttribute('aria-label','Main Navigation');
+              
+              // Close button
+              var closeBtn=document.createElement('button');
+              closeBtn.className='side-nav-close';
+              closeBtn.innerHTML='&times;';
+              closeBtn.setAttribute('aria-label','Close menu');
+              
+              // Header section
+              var header=document.createElement('div');
+              header.className='side-nav-header';
+              var headerContent=document.createElement('div');
+              headerContent.className='side-nav-header-content';
+              var iconBox=document.createElement('div');
+              iconBox.className='side-nav-header-icon';
+              var iconImg=document.createElement('img');
+              iconImg.src='fluent_box-16-regular.png';
+              iconImg.alt='';
+              iconBox.appendChild(iconImg);
+              var titleWrapper=document.createElement('div');
+              titleWrapper.className='side-nav-title-wrapper';
+              var title=document.createElement('div');
+              title.className='side-nav-title';
+              title.textContent='Lost & Found';
+              var sub=document.createElement('div');
+              sub.className='side-nav-sub';
+              sub.textContent='Campus System';
+              titleWrapper.appendChild(title);
+              titleWrapper.appendChild(sub);
+              headerContent.appendChild(iconBox);
+              headerContent.appendChild(titleWrapper);
+              header.appendChild(headerContent);
+              
+              // Menu section
+              var menuSection=document.createElement('div');
+              menuSection.className='side-nav-menu-section';
+              var menuLabel=document.createElement('div');
+              menuLabel.className='side-nav-menu-label';
+              menuLabel.textContent='MAIN MENU';
+              var list=document.createElement('div');
+              list.className='side-nav-list';
+              
+              function createMenuItem(label, href, iconClass, active){
+                var el=document.createElement('div');
+                var chipClass='';
+                if(label==='Timeline') chipClass=' chip-blue-light';
+                else if(label==='Report Found Item') chipClass=' chip-bluegreen';
+                el.className='side-nav-item'+(active?' active':'')+chipClass;
+                var icon=document.createElement('span');
+                icon.className='side-nav-item-icon '+iconClass;
+                var text=document.createElement('span');
+                text.className='side-nav-item-text';
+                text.textContent=label;
+                el.appendChild(icon);
+                el.appendChild(text);
+                if(href){
+                  el.addEventListener('click',function(){ 
+                    drawer.classList.remove('open');
+                    overlay.style.display='none';
+                    document.body.classList.remove('drawer-open');
+                    window.location.href=href; 
+                  });
+                }
+                return el;
+              }
+              
+              list.appendChild(createMenuItem('Timeline', 'home.html', 'icon-home', false));
+              list.appendChild(createMenuItem('Report Found Item', 'Report_Found_item.html', 'icon-document', true));
+              list.appendChild(createMenuItem('Report Lost Item', 'report_lost_item.html', 'icon-document', false));
+              list.appendChild(createMenuItem('Search Items', 'Search_item.html', 'icon-search', false));
+              
+              menuSection.appendChild(menuLabel);
+              menuSection.appendChild(list);
+              
+              drawer.appendChild(closeBtn);
+              drawer.appendChild(header);
+              var footer=document.createElement('div');
+              footer.className='side-nav-footer';
+              var user=document.createElement('div');
+              user.className='user-card';
+              var avatar=document.createElement('div');
+              avatar.className='user-avatar';
+              avatar.textContent='S';
+              var meta=document.createElement('div');
+              meta.className='user-meta';
+              var name=document.createElement('span');
+              name.textContent='Student';
+              var email=document.createElement('span');
+              email.textContent='student@unifind.edu';
+              meta.appendChild(name); meta.appendChild(email);
+              user.appendChild(avatar); user.appendChild(meta);
+              var logout=document.createElement('button');
+              logout.className='logout-btn';
+              logout.textContent='Logout';
+              logout.addEventListener('click',function(){ window.location.href='login.html'; });
+              footer.appendChild(user); footer.appendChild(logout);
+              drawer.appendChild(menuSection);
+              drawer.appendChild(footer);
+              
+              document.body.appendChild(overlay);
+              document.body.appendChild(drawer);
+              
+              function open(){
+                overlay.style.display='block';
+                drawer.classList.add('open');
+                document.body.classList.add('drawer-open');
+                if(trigger) trigger.classList.add('open');
+                setTimeout(function(){ overlay.style.opacity='1'; },10);
+              }
+              
+              function close(){
+                overlay.style.opacity='0';
+                drawer.classList.remove('open');
+                document.body.classList.remove('drawer-open');
+                if(trigger) trigger.classList.remove('open');
+                setTimeout(function(){ overlay.style.display='none'; },250);
+              }
+              
+              if(trigger){
+                trigger.style.cursor='pointer';
+                trigger.addEventListener('click',function(e){
+                  e.stopPropagation();
+                  if(drawer.classList.contains('open')){
+                    close();
+                  }else{
+                    open();
+                  }
+                });
+                trigger.addEventListener('keydown',function(e){
+                  if(e.key==='Enter' || e.key===' '){
+                    e.preventDefault();
+                    if(drawer.classList.contains('open')){ close(); } else { open(); }
+                  }
+                });
+              }
+              
+              closeBtn.addEventListener('click',function(e){
+                e.stopPropagation();
+                close();
+              });
+              
+              overlay.addEventListener('click',function(e){
+                if(e.target===overlay) close();
+              });
+              
+              document.addEventListener('keydown',function(e){
+                if(e.key==='Escape'&&drawer.classList.contains('open')){
+                  close();
+                }
+              });
+      })();
+    </script>
+  </body>
+</html>
